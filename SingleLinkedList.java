@@ -97,6 +97,25 @@ class SingleExample
         }
     }
 
+    public int countNodes()
+    {
+        int count = 0;
+        Node t1 = head;
+        if(head==null)
+        {
+            return -1;
+        }
+        else{
+            while(t1!=null)
+            {
+                count=count+1;
+                t1 = t1.next;
+            }
+            return count;
+        }
+
+    }
+
     public void display()
     {
         Node t1 = head;
@@ -134,6 +153,9 @@ class SingleLinkedList
 
         System.out.println("Displaying nodes again");
         s1.display();
+
+        System.out.println("Counting nodes...");
+        System.out.println(s1.countNodes());
 
 
         
