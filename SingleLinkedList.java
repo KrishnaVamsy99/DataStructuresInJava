@@ -84,7 +84,7 @@ class SingleExample
             {
                 
                 n = t1.data;
-                head.next = t1.next;
+                head = t1.next;
                 t1 = t1.next;
                 return n;
             }
@@ -116,6 +116,28 @@ class SingleExample
 
     }
 
+    public int search(int key)
+    {
+        int count=0;
+        Node t = head;
+        if(head==null)
+        {
+            return -1;
+        }
+        else{
+            while(t!=null)
+            {
+                count=count+1;
+                if(t.data==key)
+                {
+                    return count;
+                }
+                t = t.next;
+            }
+            return -1;
+        }
+    }
+
     public void display()
     {
         Node t1 = head;
@@ -143,19 +165,30 @@ class SingleLinkedList
         System.out.println("Added Nodes Successfully");
         
         
-        System.out.println("Displaying nodes when nodes are added.");
-        s1.display();
+        //System.out.println("Displaying nodes when nodes are added.");
+        //s1.display();
 
         System.out.println("Deleting Node");
 
-        int deldata = s1.deleteNode(40);
+        int deldata = s1.deleteNode(10);
         System.out.println("Deleted Node data is "+deldata);
+        s1.display();
 
-        System.out.println("Displaying nodes again");
+        /*System.out.println("Displaying nodes again");
         s1.display();
 
         System.out.println("Counting nodes...");
         System.out.println(s1.countNodes());
+
+        int m = s1.search(40);
+
+        if(m==-1)
+        {
+            System.out.println("Key is not found");
+        }
+        else{
+            System.out.println("Key is found at "+m);
+        }*/
 
 
         
