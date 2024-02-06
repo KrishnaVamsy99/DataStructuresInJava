@@ -138,6 +138,89 @@ class SingleExample
         }
     }
 
+    public void addNodeAtLast(int newdata)
+    {
+        Node n1 = new Node(newdata);
+        Node t1 = head;
+        if(head==null)
+        {
+            head = n1;
+        }
+        else{
+            while (t1.next!=null) 
+            {
+                t1=t1.next;    
+            }
+            t1.next = n1;
+        }
+    }
+
+    public void insertFirst(int newdata)
+    {
+        Node n1 = new Node(newdata);
+        if(head==null)
+        {
+            head = n1;
+        }
+        else{
+            n1.next = head;
+            head = n1;
+        }
+    }
+
+    void reverse()
+    {
+        Node c = head;
+        Node p = null;
+        Node n = null;
+
+        if(head==null)
+        {
+            System.out.println("Nothing to reverse");
+        }
+        else{
+            while(c!=null)
+            {
+                n = c.next;
+                c.next = p;
+                p = c;
+                c = n;
+            }
+            head = p;
+            while(p.next!=null)
+            {
+                p = p.next;
+            }
+            tail = p;
+        }
+    }
+
+    public void insertMiddle(int newdata)
+    {
+        int count = countNodes();
+        Node n1 = new Node(newdata);
+        Node t1 = head;
+        int i=0;
+        if(head == null)
+        {
+            head = n1;
+        }
+
+        else{ 
+           
+            count = (int)Math.floor(count/2);
+            while(i<count-1)
+            {
+                t1 = t1.next;
+                i++;
+            }
+            n1.next = t1.next;
+            t1.next = n1;
+           
+        }
+    }
+
+
     public void display()
     {
         Node t1 = head;
@@ -150,6 +233,7 @@ class SingleExample
 }
 class SingleLinkedList
 {
+    
     public static void main(String[] args) 
     {
         SingleExample s1 = new SingleExample();
@@ -165,16 +249,16 @@ class SingleLinkedList
         System.out.println("Added Nodes Successfully");
         
         
-        //System.out.println("Displaying nodes when nodes are added.");
-        //s1.display();
+        System.out.println("Displaying nodes when nodes are added.");
+        s1.display();
 
-        System.out.println("Deleting Node");
+        /*System.out.println("Deleting Node");
 
         int deldata = s1.deleteNode(10);
         System.out.println("Deleted Node data is "+deldata);
         s1.display();
 
-        /*System.out.println("Displaying nodes again");
+        System.out.println("Displaying nodes again");
         s1.display();
 
         System.out.println("Counting nodes...");
@@ -189,6 +273,23 @@ class SingleLinkedList
         else{
             System.out.println("Key is found at "+m);
         }*/
+
+        /*System.out.println("Adding Node at Last...");
+        s1.addNodeAtLast(70);
+        s1.display();*/
+
+        /*System.out.println("Adding Node at First...");
+        s1.insertFirst(70);
+        s1.display();*/
+
+        //System.out.println("Reversing the elements in the list.");
+
+        //s1.reverse();
+
+        System.out.println("Insert a node at middle");
+        s1.insertMiddle(100);
+        System.out.println("After inserting at middle...");
+        s1.display();
 
 
         
