@@ -220,6 +220,57 @@ class SingleExample
         }
     }
 
+    public int deleteHead()
+    {
+        if(head == null)
+        {
+            return -1;
+        }
+        else{
+            Node t = head.next;
+            int n = head.data;
+            head.next = null;
+            head = t;
+            return n;
+        }
+    }
+
+    public void removeDuplicates()
+    {
+        if(head==null)
+        {
+            return;
+        }
+        else
+        {
+            Node c = head;
+            
+
+            while (c!=null)
+            {
+                Node t = c;
+                Node i = c.next;
+                while(i!=null)
+                {
+                    if(c.data==i.data)
+                    {
+                        t.next = i.next;
+                        if(i==tail && i.next==null)
+                        {
+                            tail = t;
+                        }
+                    }
+                    else{
+                        t = i;
+                    }
+                    i = i.next;
+                }
+                c = c.next; 
+            }
+            System.out.println("printint tail data: "+tail.data);
+
+        }
+    }
 
     public void display()
     {
@@ -242,9 +293,10 @@ class SingleLinkedList
         s1.addNode(10);
         s1.addNode(20);
         s1.addNode(30);
+        s1.addNode(20);
+        s1.addNode(20);
         s1.addNode(40);
-        s1.addNode(50);
-        s1.addNode(60);
+        s1.addNode(10);
         
         System.out.println("Added Nodes Successfully");
         
@@ -286,9 +338,29 @@ class SingleLinkedList
 
         //s1.reverse();
 
-        System.out.println("Insert a node at middle");
+        /*System.out.println("Insert a node at middle");
         s1.insertMiddle(100);
         System.out.println("After inserting at middle...");
+        s1.display();*/
+
+        System.out.println();
+
+        /*int n = s1.deleteHead();
+        if(n==-1)
+        {
+            System.out.println("Sorry, there are no nodes in the single linked list.");
+        }
+        else{
+            System.out.println(n+" is deleted from the single linked list.");
+        }
+
+        System.out.println();
+
+        s1.display();*/
+
+
+        s1.removeDuplicates();
+
         s1.display();
 
 

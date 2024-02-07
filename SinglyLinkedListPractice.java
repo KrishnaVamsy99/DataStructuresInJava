@@ -175,6 +175,43 @@ class LinkedListPractice
         }
     }
 
+    public void removeDuplicates()
+    {
+        if(head==null)
+        {
+            return;
+        }
+        else
+        {
+            Node c = head;
+            
+
+            while(c!=null)
+            {
+                Node t = c;
+                Node i = c.next;
+                while(i!=null)
+                {
+                    if(c.data!=i.data)
+                    {
+                        t = i;
+                    }
+                    else
+                    {
+                        t.next = i.next;
+                        if(i==tail && i.next==null)
+                        {
+                            tail = t;
+                        }
+                    }
+                    i = i.next;
+                }
+                c = c.next;
+            }
+
+        }
+    }
+
     public void display()
     {
         Node t=head;
@@ -194,8 +231,11 @@ class SinglyLinkedListPractice
         llp1.addNode(10);
         llp1.addNode(20);
         llp1.addNode(30);
-        llp1.addNode(40);
+        llp1.addNode(10);
         llp1.addNode(50);
+        llp1.addNode(20);
+        llp1.addNode(40);
+        llp1.addNode(10);
         //llp1.display();
         
         /*llp1.reverseList();
@@ -223,7 +263,11 @@ class SinglyLinkedListPractice
 
         }*/
         //llp1.insertAtFirst(70);
-        llp1.insertAtMiddle(100);
+        /*llp1.insertAtMiddle(100);
+        llp1.display();*/
+
+        llp1.removeDuplicates();
+        System.out.println();
         llp1.display();
 
        
