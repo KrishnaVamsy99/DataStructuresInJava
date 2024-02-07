@@ -177,6 +177,7 @@ class SingleExample
         if(head==null)
         {
             System.out.println("Nothing to reverse");
+            return;
         }
         else{
             while(c!=null)
@@ -267,7 +268,67 @@ class SingleExample
                 }
                 c = c.next; 
             }
-            System.out.println("printint tail data: "+tail.data);
+            //System.out.println("printint tail data: "+tail.data);
+
+        }
+    }
+
+    public Node reverseList(Node temp)
+    {
+        Node c = temp;
+        Node p = null;
+        Node n = null;
+
+        if(head==null)
+        {
+            return null;
+        }
+        while (c!=null) 
+        {
+            n = c.next;
+            c.next = p;
+            p = c;
+            c = n;
+        }
+        return p;
+    }
+
+    public boolean isPalindrome()
+    {
+        if(head==null)
+        {
+            return false;
+        }
+        else
+        {
+            boolean flag = true;
+            Node c = head;
+            int mid = (countNodes()%2==0)?(countNodes()/2):((countNodes()+1)/2);
+
+            for(int i=0;i<mid;i++)
+            {
+                c = c.next;
+            }
+
+            Node revhead = reverseList(c.next);
+
+            while(head!=null && revhead!=null)
+            {
+                if(head.data!=revhead.data)
+                {
+                    flag = false;
+                    break;
+                }
+                head = head.next;
+                revhead = revhead.next;
+            }
+            if(flag)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
 
         }
     }
@@ -294,9 +355,8 @@ class SingleLinkedList
         s1.addNode(20);
         s1.addNode(30);
         s1.addNode(20);
-        s1.addNode(20);
-        s1.addNode(40);
         s1.addNode(10);
+        
         
         System.out.println("Added Nodes Successfully");
         
@@ -359,9 +419,18 @@ class SingleLinkedList
         s1.display();*/
 
 
-        s1.removeDuplicates();
+        //s1.removeDuplicates();
 
-        s1.display();
+        //s1.display();
+
+        if(s1.isPalindrome())
+        {
+            System.out.println("The single linked list is palindrome");
+        }
+        else
+        {
+            System.out.println("THe single linked list is not a palindrome");
+        }
 
 
         

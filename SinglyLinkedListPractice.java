@@ -212,6 +212,68 @@ class LinkedListPractice
         }
     }
 
+    public boolean isPalindrome()
+    {
+        if(head == null)
+        {
+            return false;
+        }
+        else
+        {
+            Node c = head;
+            boolean flag = true;
+            int mid = (countNodes()%2==0)?(countNodes()/2):((countNodes()+1)/2);
+
+            for(int i=0;i<mid;i++)
+            {
+                c = c.next;
+            }
+
+            Node revhead = reverseList(c.next);
+
+            while (head!=null && revhead!=null)
+            {
+                if(head.data!=revhead.data)
+                {
+                    flag = false;
+                    break;
+                }
+                head = head.next;
+                revhead = revhead.next;
+                
+            }
+            if(flag)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+    }
+
+    public Node reverseList(Node temp)
+    {
+        Node c = temp;
+        Node p = null;
+        Node n = null;
+
+        if(temp == null)
+        {
+            return null;
+        }
+
+        while(c!=null) 
+        {
+            n = c.next;
+            c.next = p;
+            p = c;
+            c = n;
+        }
+        return p;
+    }
+
     public void display()
     {
         Node t=head;
@@ -266,9 +328,18 @@ class SinglyLinkedListPractice
         /*llp1.insertAtMiddle(100);
         llp1.display();*/
 
-        llp1.removeDuplicates();
+        /*llp1.removeDuplicates();
         System.out.println();
-        llp1.display();
+        llp1.display();*/
+
+        if(llp1.isPalindrome())
+        {
+            System.out.println("The Singly linked list is palindrome.");
+        }
+        else
+        {
+            System.out.println("The singly linked list is not palindrome.");
+        }
 
        
         s.close();
