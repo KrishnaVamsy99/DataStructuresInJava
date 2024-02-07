@@ -333,6 +333,75 @@ class SingleExample
         }
     }
 
+    public void swapHeadTail()
+    {
+        if(head==null)
+        {
+            return;
+        }
+        else
+        {
+            Node c = head;
+            Node i = c.next;
+            while(i.next!=null)
+            {
+                i = i.next;
+            }
+
+            c.data = c.data + i.data;
+            i.data = c.data - i.data;
+            c.data = c.data - i.data;
+
+        }
+    }
+
+    public Node maxNode()
+    {
+        if(head == null)
+        {
+            return null;
+        }
+        else
+        {
+            int maxi = Integer.MIN_VALUE;
+            Node maxiNode = null;
+            Node c = head;
+            while(c!=null)
+            {
+                if(maxi<c.data)
+                {
+                    maxi = c.data;
+                    maxiNode = c;
+                }
+                c = c.next;
+            }
+            return maxiNode;
+        }
+    }
+    public Node minNode()
+    {
+        if(head == null)
+        {
+            return null;
+        }
+        else
+        {
+            int mini = Integer.MAX_VALUE;
+            Node miniNode = null;
+            Node c = head;
+            while(c!=null)
+            {
+                if(mini>c.data)
+                {
+                    mini = c.data;
+                    miniNode = c;
+                }
+                c = c.next;
+            }
+            return miniNode;
+        }
+    }
+
     public void display()
     {
         Node t1 = head;
@@ -354,8 +423,8 @@ class SingleLinkedList
         s1.addNode(10);
         s1.addNode(20);
         s1.addNode(30);
-        s1.addNode(20);
-        s1.addNode(10);
+        s1.addNode(40);
+        s1.addNode(50);
         
         
         System.out.println("Added Nodes Successfully");
@@ -423,15 +492,24 @@ class SingleLinkedList
 
         //s1.display();
 
-        if(s1.isPalindrome())
+        /*if(s1.isPalindrome())
         {
             System.out.println("The single linked list is palindrome");
         }
         else
         {
             System.out.println("THe single linked list is not a palindrome");
-        }
+        }*/
 
+        //s1.swapHeadTail();
+        //s1.display();
+        Node maxi = s1.maxNode();
+        System.out.println("Printing Max Node address: "+maxi);
+        System.out.println("Printing Max Node data: "+ maxi.data);
+
+        Node mini = s1.minNode();
+        System.out.println("Printing Min Node address: "+mini);
+        System.out.println("Printing Min Node data: "+ mini.data);
 
         
     }
