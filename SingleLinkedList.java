@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Node
 {
     int data;
@@ -402,6 +404,88 @@ class SingleExample
         }
     }
 
+    public boolean swapTwoNodes(int fnum, int snum)
+    {
+        if(head == null)
+        {
+            return false;
+        }
+        else
+        {
+            if(fnum>countNodes() || snum>countNodes() || fnum==snum)
+            {
+                return false;
+            }
+            else
+            {
+                Node curent = head;
+                Node index = head;
+
+                for(int i=0;i<fnum-2;i++)
+                {
+                    curent = curent.next;
+                }
+
+                for(int j=0;j<snum-2;j++)
+                {
+                    index = index.next;
+                }
+
+                Node currentNext = curent.next;
+                Node indexNext = index.next;
+
+                if(indexNext.next!=null)
+                {
+                    curent.next = indexNext;
+                    index.next = currentNext;
+                    currentNext.next = indexNext.next;
+                    indexNext.next = index;
+                    
+                }
+                else
+                {
+                    curent.next = indexNext;
+                    index.next = currentNext;
+                    indexNext.next = currentNext.next;
+                    currentNext.next = null;
+                    tail  = currentNext;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int removeMiddle()
+    {
+        if(head == null)
+        {
+            return -1;
+        }
+        else
+        {
+            Node current = head;
+            int mid = (countNodes()%2==0)?(countNodes()/2):((countNodes()+1)/2);
+            int n;
+            for(int i=0;i<mid-2;i++)
+            {
+                current = current.next;
+            }
+            Node i = current.next;
+            if(i!=null)
+            {
+                n=i.data;
+                current.next = i.next;
+                i.next = null;
+            }
+            else{
+                n = current.data;
+                current = head = null;
+            }
+            
+            return n;
+        }
+    }
+
     public void display()
     {
         Node t1 = head;
@@ -417,6 +501,8 @@ class SingleLinkedList
     
     public static void main(String[] args) 
     {
+        Scanner scan = new Scanner(System.in);
+
         SingleExample s1 = new SingleExample();
 
         System.out.println("Adding Nodes");
@@ -503,13 +589,29 @@ class SingleLinkedList
 
         //s1.swapHeadTail();
         //s1.display();
-        Node maxi = s1.maxNode();
+        /*Node maxi = s1.maxNode();
         System.out.println("Printing Max Node address: "+maxi);
         System.out.println("Printing Max Node data: "+ maxi.data);
 
         Node mini = s1.minNode();
         System.out.println("Printing Min Node address: "+mini);
-        System.out.println("Printing Min Node data: "+ mini.data);
+        System.out.println("Printing Min Node data: "+ mini.data);*/
+        /*System.out.println("Enter 1st postion");
+        int m = scan.nextInt();
+        System.out.println("Enter 2nd postion");
+        int n = scan.nextInt();
+        if(s1.swapTwoNodes(m,n))
+        {
+            s1.display();
+        }
+        else{
+            System.out.println("Please enter different valid numbers");
+        }*/
+
+        int n = s1.removeMiddle();
+        System.out.printf("The deleted element is %d\n",n);
+
+        s1.display();
 
         
     }
