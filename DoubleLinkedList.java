@@ -249,6 +249,121 @@ class DoubleLinkedListDemo
         }
     }
 
+    public void swapNodes(int fnum, int snum)
+    {
+        if(head==null || head.next == null)
+        {
+            return;
+        }
+        else
+        {
+            DoubleNode c = head;
+            DoubleNode i = head;
+
+            for(int j=0;j<fnum-2;j++)
+            {
+                c = c.next;
+            }
+            for(int j=0;j<snum-2;j++)
+            {
+                i = i.next;
+            }
+            DoubleNode ct = c.next;
+            DoubleNode it = i.next;
+
+            ct.previous = it.previous;
+            i.next = ct;
+            c.next =it;
+            it.previous = c;
+
+            if(it!=tail)
+            {
+                i.previous = it.next.previous;
+                it.next.previous = ct;
+                ct.next = it.next;
+                it.next = i;
+            }
+            else
+            {
+                it.next = i;
+                i.previous = it;
+                ct.next = null;
+
+            }
+        }
+    }
+
+    public DoubleNode maxNode()
+    {
+        if(head==null || head.next==null)
+        {
+            return null;
+        }
+        else
+        {
+            int max = Integer.MIN_VALUE;
+            DoubleNode t = head;
+            DoubleNode maxinode = null;
+            while(t!=null)
+            {
+                if(t.data>max)
+                {
+                    max = t.data;
+                    maxinode = t;
+                }
+                t = t.next;
+            }
+            return maxinode;
+        }
+    }
+
+    public DoubleNode minNode()
+    {
+        if(head==null || head.next==null)
+        {
+            return null;
+        }
+        else
+        {
+            int min = Integer.MAX_VALUE;
+            DoubleNode t = head;
+            DoubleNode mininode = null;
+            while(t!=null)
+            {
+                if(t.data<min)
+                {
+                    min = t.data;
+                    mininode = t;
+                }
+                t = t.next;
+            }
+            return mininode;
+        }
+    }
+
+    public boolean isPalindrome()
+    {
+        if(head==null || head.next==null)
+        {
+            return false;
+        }
+        else
+        {
+            DoubleNode c = head;
+            DoubleNode i = tail;
+
+            while (c!=i)
+            {
+                if(c.data!=i.data)
+                {
+                    return false;
+                }
+                c = c.next;
+                i = i.previous;
+            }
+            return true;
+        }
+    }
     public void display()
     {
         if(head==null)
@@ -272,13 +387,11 @@ class DoubleLinkedList
     public static void main(String[] args) 
     {
         DoubleLinkedListDemo dl1 = new DoubleLinkedListDemo();
-        dl1.addNode(50);
-        dl1.addNode(30);
         dl1.addNode(10);
         dl1.addNode(20);
-        dl1.addNode(40);
+        dl1.addNode(30);
+        dl1.addNode(20);
         dl1.addNode(10);
-        dl1.addNode(50);
 
         dl1.display();
         /*System.out.println("----------------------");
@@ -327,9 +440,24 @@ class DoubleLinkedList
         else{
             System.out.println("The deleted node is "+deletedMiddleNode);
         }*/
-        System.out.println(".....................................");
-        dl1.removeDuplicates();
-        dl1.display();
+        //System.out.println(".....................................");
+        //dl1.swapNodes(2,4);
+        //dl1.display();
+        System.out.println("....................................");
+
+        System.out.println(dl1.maxNode().data);
+        System.out.println(dl1.minNode().data);
+
+        System.out.println(".................................");
+        
+        if(dl1.isPalindrome())
+        {
+            System.out.println("The given list is palindrome.");
+        }
+        else
+        {
+            System.out.println("The given list is not palindrome.");
+        }
 
     }
     
