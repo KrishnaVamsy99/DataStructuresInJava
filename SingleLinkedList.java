@@ -613,6 +613,8 @@ class SingleLinkedList
 
         s1.display();
 
+        scan.close();
+
         
     }
     
