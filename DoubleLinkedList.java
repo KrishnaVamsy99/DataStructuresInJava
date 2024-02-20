@@ -364,6 +364,48 @@ class DoubleLinkedListDemo
             return true;
         }
     }
+
+    public DoubleNode search(int key)
+    {
+        if(head==null || head.next == null)
+        {
+            return null;
+        }
+        else
+        {
+            DoubleNode t = head;
+            while(t!=null)
+            {
+                if(t.data==key)
+                {
+                    return t;
+                }
+                t = t.next;   
+            }
+            return null;
+        }
+    }
+
+    public void shiftNodes(int n)
+    {
+        if(head==null || head.next==null)
+        {
+            return;
+        }
+        else
+        {
+            DoubleNode t1;
+            for(int i=0;i<n;i++)
+            {
+                t1 = tail.previous;
+                head.previous = tail;
+                tail.next = head;
+                tail.previous = null;
+                tail = t1;
+                tail.next = null;
+            }
+        }
+    }
     public void display()
     {
         if(head==null)
@@ -390,8 +432,8 @@ class DoubleLinkedList
         dl1.addNode(10);
         dl1.addNode(20);
         dl1.addNode(30);
-        dl1.addNode(20);
-        dl1.addNode(10);
+        dl1.addNode(40);
+        dl1.addNode(50);
 
         dl1.display();
         /*System.out.println("----------------------");
@@ -443,21 +485,36 @@ class DoubleLinkedList
         //System.out.println(".....................................");
         //dl1.swapNodes(2,4);
         //dl1.display();
-        System.out.println("....................................");
+        //System.out.println("....................................");
 
-        System.out.println(dl1.maxNode().data);
-        System.out.println(dl1.minNode().data);
+        //System.out.println(dl1.maxNode().data);
+        //System.out.println(dl1.minNode().data);
 
         System.out.println(".................................");
         
-        if(dl1.isPalindrome())
+        /*if(dl1.isPalindrome())
         {
             System.out.println("The given list is palindrome.");
         }
         else
         {
             System.out.println("The given list is not palindrome.");
+        }*/
+
+        /*DoubleNode t = dl1.search(30);
+        if(t==null)
+        {
+            System.out.println("Sorry, the key is not found");
         }
+        else
+        {
+            System.out.println("The node of the key is: "+t+" and its data is "+t.data);
+        }*/
+
+        dl1.shiftNodes(2);
+        dl1.display();
+
+
 
     }
     

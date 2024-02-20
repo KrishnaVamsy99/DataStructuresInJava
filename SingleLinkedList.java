@@ -486,6 +486,8 @@ class SingleExample
         }
     }
 
+    
+
     public void display()
     {
         Node t1 = head;
