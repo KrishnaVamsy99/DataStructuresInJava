@@ -4,49 +4,36 @@
 
 class Queue
 {
-    int front,rear;
+    int front,rear,size,maxsize;
+    int []queue;
 
-    public Queue()
+    public Queue(int maxsize)
     {
-        this.front=-1;
-        this.rear=-1;
+        this.queue = new int[maxsize];
+        this.front = -1;
+        this.rear = -1;
+        this.size = 0;
+        this.maxsize = maxsize;
     }
 
-    public void insertRear(int data, int []arr) 
+    public void enqueue(int data) 
     {
-        if(arr.length!=0)
+        if(maxsize!=0)
         {
-                // Checking if array length is not empty. if it is empty then don't do anything. just add return
-            if(front==-1 && rear==-1)
+            if(isEmpty())
             {
-                // Checking if array is empty.
-                // if front and rear is equal to -1 then queue is empty
-                // when we are adding first element both front and rear will be -1
-                // So, we have to move both pointers to first index of array and add the data into the array
-
                 front = front + 1;
                 rear = rear + 1;
-                arr[rear] = data;
+                queue[rear] = data;
+                size = size+1;
             }
             else
             {
-                // If front and rear are not equeal to -1, then there one or more elements are presents in the array.
-                // We have to check for the rear that if it is equal to length-1 of the list.
-                   
-                // if(rear<arr.length-1)
-                // {
-                //     rear = rear + 1;
-                //     arr[rear] = data;
-                // }
-                // else
-                // {
-                //     System.out.println("Your queue is full.");    
-                // }
-
-                if(!isFull(arr))
+                if(!isFull())
                 {
                     rear = rear + 1;
-                    arr[rear] = data;
+                    queue[rear] = data;
+                    size = size+1;
                 }
                 else{
                     System.out.println("Your queue is full.");
@@ -56,37 +43,39 @@ class Queue
         }
     }
 
-    public int deleteFront(int []arr)
+    public int dequeue()
     {
         int n;
 
         // First check whether queue is empty because, if queue is empty then you cannnot delete any elements
-        if(front==-1 && rear==-1)
+        if(isEmpty())
         {
             return -1;
         }
-        else if(front==rear)
+        else if(front==rear) // if front and rear are equal then it means only one element is present
         {
-            n = arr[rear];
-            arr[rear] = 0;
+            n = queue[rear];
+            queue[rear] = 0;
             front = front-1;
             rear = rear-1;
+            size = size-1;
             return n;
         }
         else
         {
-            n = arr[front];
-            for(int i=front;i<rear;i++)
+            n = queue[front];
+            for(int i=0;i<size-1;i++)
             {
-                arr[i] = arr[i+1];
+                queue[i] = queue[i+1];
             }
-            arr[rear] = 0;
+            queue[rear] = 0;
             rear = rear-1;
+            size = size-1;
             return n;
         }
     }
 
-    public boolean isEmpty(int []arr)
+    public boolean isEmpty()
     {
         if(rear==-1)
         {
@@ -95,15 +84,15 @@ class Queue
         return false;
     }
 
-    public boolean isFull(int []arr)
+    public boolean isFull()
     {
-        if(rear==arr.length-1)
+        if(size==maxsize)
         {
             return true;
         }
         return false;
     }
-    public void display(int []arr)
+    public void display()
     {
         if(rear==-1)
         {
@@ -113,7 +102,7 @@ class Queue
         {
             for(int i=front;i<=rear;i++)
             {
-                System.out.println(arr[i]);
+                System.out.println(queue[i]);
             }
         }
     }
@@ -124,26 +113,29 @@ class QueueDemo
     
     public static void main(String[] args) 
     {
-        int []arr = new int[5]; // {0,0,0,0,0}
+        Queue q = new Queue(5);
 
-        Queue q1 = new Queue();
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        q.enqueue(40);
+        q.enqueue(50);
+        //q.enqueue(60);
 
-        if(q1.isEmpty(arr))
-        {
-            System.out.println("Queue is empty");
-        }
-
-        q1.insertRear(10, arr);
-        q1.insertRear(20, arr);
-        q1.insertRear(30, arr);
-        q1.insertRear(40, arr);
-        q1.insertRear(50, arr);
-        q1.display(arr);
-
-        if(q1.isFull(arr))
-        {
-            System.out.println("Queue is full");
-        }
+        System.out.println("deleted element is: "+q.dequeue());
+        System.out.println("-------------------------------");
+        q.display();
+        //q.enqueue(60);
+        System.out.println("-------------------------------");
+        q.display();
+        System.out.println("Checking queue is empty or not");
+        if(q.isEmpty())System.out.println("Queue is empty");
+        else System.out.println("Queue is not empty");
+        System.out.println("Checking Queue is full or not");
+        if(q.isFull()) System.out.println("Queue is full");
+        else System.out.println("Queue is not full.");
+        System.out.println("Max size of queue is: "+q.maxsize);
+        System.out.println("Current size of queue is: "+q.size);
     }
     
 }
