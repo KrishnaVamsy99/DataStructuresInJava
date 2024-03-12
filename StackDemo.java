@@ -40,13 +40,15 @@ class Stack
         }
     }
 
-    public int peek()
+    public int peek(int pos)
     {
-        if(!isEmpty())
+        if(top-pos+1<0)
         {
-            return s[top];
+            return -1;
         }
-        return -1;
+
+        return s[top-pos+1];
+
     }
 
     public boolean isFull()
@@ -93,12 +95,9 @@ class StackDemo
         s.push(40);
         s.push(50);
 
-        s.pop();
-
-
         s.display();
         System.out.println("------------------------");
-        System.out.println(s.peek());
+        System.out.println(s.peek(2));
 
     }
     
