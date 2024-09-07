@@ -18,47 +18,72 @@ import java.util.Stack;
 
 class Convert
 {
+    public static boolean isOpeningBracket(char ch)
+    {
+        if(ch=='{' || ch=='[' || ch=='(')
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isClosingBracket(char ch)
+    {
+        if(ch=='}' ||  ch==']' || ch==')')
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isMatchingPair(char opening, char closing)
+    {
+        if(opening=='{' && closing=='}')
+        {
+            return true;
+        }
+        if(opening=='[' && closing==']')
+        {
+            return true;
+        }
+        if(opening=='(' && closing==')')
+        {
+            return true;
+        }
+        return false;
+    }
     public static String convertToPostfix(String str)
     {
         Stack<Character> st = new Stack<>();
+        StringBuilder postfix = new StringBuilder();
 
-        String str2 = "";
-        
-        // Go through the infix expression
         for(char ch: str.toCharArray())
         {
-            // Check whether it is character or digit. If Yes, directly add to str2(postfix)
             if(Character.isLetterOrDigit(ch))
             {
-                str2 += ch;
+                postfix.append(ch);
             }
-
-            // if ch is '(', if yes, push to stack
-            else if(ch=='(')
+            else if(isOpeningBracket(ch))
             {
                 st.push(ch);
             }
-
-            // pop all elements in the stack until you find '(' and upto stack is not empty
-            else if(ch==')')
+            else if(isClosingBracket(ch))
             {
-                while(!st.isEmpty() && st.peek()!='(')
+                while(!st.isEmpty() && !isMatchingPair(st.peek(), ch))
                 {
-                    str2 += st.pop();
+                    postfix.append(st.pop());
                 }
-                // Here still the top element will be '(' character.
-                if(!st.empty() && st.peek()!='(')
+                if(!st.isEmpty() && !isMatchingPair(st.peek(), ch))
                 {
-                    return "Invalid Expression";
+                    return "Invalid expression";
                 }
                 st.pop();
             }
-            // if operator is found, we need to check the precedence
             else
             {
-                while (!st.isEmpty() && precedence(ch)<=precedence(st.peek()))
+                while(!st.isEmpty() && precedence(ch) <= precedence(st.peek()))
                 {
-                    str2 +=st.pop();
+                    postfix.append(st.pop());
                 }
                 st.push(ch);
             }
@@ -67,12 +92,11 @@ class Convert
         {
             if(st.peek()=='(')
             {
-                return "Invalid expression";
+                return "Invalid expession";
             }
-            str2 +=st.pop();
+            postfix.append(st.pop());
         }
-
-        return str2;
+        return postfix.toString();
     }
 
     public static int precedence(char ch)
