@@ -2,8 +2,6 @@ import java.util.Stack;
 
 class ParanthesisMatching
 {
-    
-
     public static boolean paranthesisMatchingIsBalanced(String str)
     {
         Stack<Character> st = new Stack<>();
